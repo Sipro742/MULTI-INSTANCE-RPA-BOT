@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Desktop - CLINSYS</title>
+  <style>
+    * { box-sizing: border-box; font-family: "Segoe UI", Arial, sans-serif; }
+    body { margin: 0; background: #f1f5f9; color: #1e293b; height: 100vh; overflow: hidden; }
+
+    /* LOGIN */
+    #login-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    }
+    #login-seccion {
+      background: #fff; padding: 32px; border-radius: 10px; width: 360px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    #login-seccion h2 { margin: 0 0 6px; color: #1e3a8a; text-align: center; }
+    #login-seccion p { margin: 0 0 20px; font-size: 13px; color: #64748b; text-align: center; }
+    .form-group { margin-bottom: 14px; }
+    .form-control {
+      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px;
+    }
+    .btn-login {
+      width: 100%; padding: 10px; background: #2563eb; color: #fff; border: none;
+      border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .btn-login:hover { background: #1d4ed8; }
+
+    /* WORK AREA */
+    #work-area { display: none; height: 100vh; flex-direction: column; }
+    #main-header {
+      height: 64px; background: #1e3a8a; color: #fff; display: flex;
+      align-items: center; justify-content: space-between; padding: 0 20px;
+    }
+    .brand { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+    .top-menu { display: flex; gap: 16px; align-items: center; }
+    .button-app {
+      background: #2563eb; color: #fff; padding: 8px 14px; border-radius: 6px;
+      font-size: 13px; cursor: pointer; transition: background 0.2s;
+    }
+    .button-app:hover { background: #3b82f6; }
+    #btn-sesion { font-size: 13px; cursor: pointer; opacity: 0.85; }
+    #main-content { flex: 1; display: flex; flex-direction: column; position: relative; }
+    #main-tabs {
+      background: #e2e8f0; padding: 8px 16px 0; border-bottom: 1px solid #cbd5e1;
+      display: flex; gap: 6px; min-height: 38px;
+    }
+    .tab-item {
+      background: #fff; padding: 6px 14px; border-radius: 6px 6px 0 0;
+      font-size: 13px; font-weight: 600; border: 1px solid #cbd5e1; border-bottom: none;
+    }
+    #main-application { flex: 1; position: relative; background: #fff; }
+    iframe { width: 100%; height: 100%; border: none; position: absolute; inset: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA DE LOGIN (visible al inicio para el autologin de A.R.I.A.) -->
+  <div id="login-screen">
+    <section id="login-seccion">
+      <h2>CLINSYS</h2>
+      <p>Sistema Integrado de Gestión Clínica (Demo)</p>
+      <div class="form-group">
+        <input type="text" class="form-control" id="txtUsuario" placeholder="Usuario">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="txtClave" placeholder="Clave">
+      </div>
+      <button id="btnIngresar" type="button" class="btn-login">Ingresar</button>
+    </section>
+  </div>
+
+  <!-- ESCRITORIO PRINCIPAL -->
+  <div id="work-area">
+    <div id="main-header">
+      <div class="brand">CLINSYS — ADM</div>
+      <div class="top-menu">
+        <div class="button-app" web="\ADM\MOD465\MOD465_ASIGNA_PROVEEDOR.aspx" padre="adm">
+          Asignar Precio - Proveedor
+        </div>
+        <span id="btn-sesion" onclick="location.reload()">Cerrar sesión</span>
+      </div>
+    </div>
+
+    <div id="main-content">
+      <div id="main-tabs"></div>
+      <div id="main-application">
+        <p style="padding: 24px; color: #64748b;">
+          Selecciona <b>Asignar Precio - Proveedor</b> en la barra superior para abrir el módulo MOD-465.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function iniciarSesion() {
+      const u = document.getElementById("txtUsuario").value.trim();
+      const p = document.getElementById("txtClave").value.trim();
+      if (!u || !p) return;
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("work-area").style.display = "flex";
+    }
+
+    document.getElementById("btnIngresar").addEventListener("click", iniciarSesion);
+    document.getElementById("txtClave").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") iniciarSesion();
+    });
+
+    // Abre el iframe exacto que busca clinsys_arancelar_sinautolog.py
+    document.querySelector('div.button-app[web$="MOD465_ASIGNA_PROVEEDOR.aspx"]')
+      .addEventListener("click", () => {
+        document.getElementById("main-tabs").innerHTML =
+          '<div class="tab-item">Asignar Precio - Proveedor (MOD-465)</div>';
+        document.getElementById("main-application").innerHTML =
+          '<iframe src="MOD465_ASIGNA_PROVEEDOR.aspx"></iframe>';
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# ==========================================================================
+# PROCEDIMIENTOS_EXTRA.txt  -  Modo "Procedimientos Únicos" de A.R.I.A.
+# Formato por línea:   SERVICIO | PROVEEDOR | NIT
+#  - SERVICIO: palabra(s) que aparecen en "Estudio solicitado:" (sin importar
+#    mayúsculas ni tildes). Se busca como palabra completa.
+#  - PROVEEDOR: nombre tal como figura en el desplegable de proveedores de CLINSYS.
+#  - NIT: el que debe quedar cargado en "Nit del proveedor" (se verifica).
+# Las líneas vacías y las que empiezan con # se ignoran.
+# ==========================================================================
+
+CARDIOLOGIA | EDIFICIO MÉDICO LOS ROBLES | 109876543
+PROCTOLOGIA | EDIFICIO MÉDICO LOS ROBLES | 109876543
+GASTROENTEROLOGIA | SALUD INTEGRAL, SOCIEDAD ANONIMA | 81234567
+PSIQUIATRA | PÉREZ, GÓMEZ, CARLOS ALBERTO | 71234568
+NEFROLOGIA | Dra. LAURA PATRICIA RIVERA SAC | 61234569
+REUMATOLOGO | TORRES, LUNA,, ANDREA, BEATRIZ | 51234570
+ECOCARDIOGRAFIA | EDIFICIO MÉDICO LOS ROBLES | 109876543
+NUTRICIONISTA | CASTILLO,MORALES,,DANIELA,FERNANDA | 108765432
+RESONANCIA MAGNETICA | DIAGNÓSTICOS MÉDICOS DEL NORTE, S.A. | 41234571
